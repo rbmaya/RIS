@@ -1,0 +1,50 @@
+buildscript {
+    dependencies {
+        classpath 'com.github.jacobono:gradle-jaxb-plugin:1.3.6'
+    }
+}
+
+plugins {
+    id 'java'
+    id 'application'
+}
+
+apply plugin: 'com.github.jacobono.jaxb'
+
+application {
+    mainClassName = 'Main'
+}
+
+group 'nsu.rybina'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+
+    implementation 'org.apache.logging.log4j:log4j-api:2.17.1'
+    implementation 'org.apache.logging.log4j:log4j-core:2.17.1'
+    implementation 'org.apache.commons:commons-compress:1.21'
+    implementation 'commons-cli:commons-cli:1.5.0'
+
+    def jaxbVersion = '2.2.4'
+    jaxb "com.sun.xml.bind:jaxb-xjc:${jaxbVersion}"
+    jaxb "com.sun.xml.bind:jaxb-impl:${jaxbVersion}"
+    jaxb "javax.xml.bind:jaxb-api:${jaxbVersion}"
+}
+
+jaxb {
+    xsdDir = "src/main/resources"
+    xjc {
+        generatePackage = "generated" // Set the package name for generated source files
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
