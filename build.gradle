@@ -7,6 +7,8 @@ buildscript {
 plugins {
     id 'java'
     id 'application'
+    id 'org.springframework.boot' version '2.6.4'
+    id "io.spring.dependency-management" version "1.0.11.RELEASE"
 }
 
 apply plugin: 'com.github.jacobono.jaxb'
@@ -38,6 +40,12 @@ dependencies {
     jaxb "javax.xml.bind:jaxb-api:${jaxbVersion}"
 
     implementation 'org.postgresql:postgresql:42.1.4'
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
 }
 
 jaxb {
